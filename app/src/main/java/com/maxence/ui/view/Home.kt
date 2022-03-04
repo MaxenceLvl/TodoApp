@@ -94,7 +94,8 @@ fun MainContent(scaffoldState: ScaffoldState) {
                 modifier = Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                list.forEachIndexed { index, toDo ->
+                val sortedList = list.sortedWith(compareBy { it.isComplete })
+                sortedList.forEachIndexed { index, toDo ->
                     TodoItem(toDo, scope, model)
                 }
             }

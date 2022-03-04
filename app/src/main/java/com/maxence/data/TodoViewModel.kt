@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TodoViewModel(application:Application):ViewModel() {
-    private val db=RoomSingleton.getInstance(application)
+    private val db = RoomSingleton.getInstance(application)
 
     internal val todoList:LiveData<MutableList<ToDo>> = db.todoDao().getTodos()
 
@@ -21,7 +21,7 @@ class TodoViewModel(application:Application):ViewModel() {
 
     fun update(todo: ToDo){
         viewModelScope.launch(Dispatchers.IO) {
-            db.todoDao().update(todo)
+            db.todoDao().update(todo.id, !todo.isComplete)
         }
     }
 

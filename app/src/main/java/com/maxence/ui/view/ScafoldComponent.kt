@@ -15,7 +15,7 @@ fun GetScaffold(){
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Compose - ToDo Application",color= Color.White)
+                    Text(text = "ToDo Application",color= Color.White)
                         },
                 backgroundColor = Color(0xFFFDA433),
             )
