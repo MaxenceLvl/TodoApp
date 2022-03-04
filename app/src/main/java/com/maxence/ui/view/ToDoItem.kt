@@ -1,23 +1,17 @@
 package com.maxence.ui.view
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.maxence.data.ToDo
 import com.maxence.data.TodoViewModel
@@ -31,35 +25,57 @@ fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel) {
         modifier = Modifier
             .padding(2.dp)
             .fillMaxWidth()
+            .height(42.dp)
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
-        Row(
-            modifier = Modifier.padding(4.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "${toDo.id}",
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(start = 12.dp)
-            )
-            Text(
-                text = " : ${toDo.title}",
-            )
-            IconButton(onClick = {
-                model.update(toDo)
-                scope.launch {
-                    Toast.makeText(ctx, "Notes updated id : ${toDo.id}",Toast.LENGTH_LONG).show()
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.CenterStart) {
+            Row(
+                modifier = Modifier.padding(4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = toDo.title,
+                    modifier = Modifier
+                        .padding(start = 16.dp, bottom = if (toDo.isComplete) 4.dp else 0.dp)
+                        .weight(0.8f)
+                )
+                Checkbox(
+                    checked = toDo.isComplete,
+                    onCheckedChange = {
+                        println(toDo)
+                        model.update(toDo)
+                        scope.launch {
+                            Toast.makeText(
+                                ctx,
+                                "Notes updated id : ${toDo.id} -> ${toDo.isComplete}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+                )
+                IconButton(onClick = {
+                    model.delete(toDo)
+                    scope.launch {
+                        Toast.makeText(ctx, "Notes deleted id : ${toDo.id}", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }) {
+                    Icon(Icons.Filled.Delete, "", tint = Color.Red)
                 }
-            }) {
-                Icon(Icons.Filled.Edit, "", tint = Color.Magenta)
             }
-            IconButton(onClick = {
-                model.delete(toDo)
-                scope.launch {
-                    Toast.makeText(ctx, "Notes deleted id : ${toDo.id}",Toast.LENGTH_LONG).show()
-                }
-            }) {
-                Icon(Icons.Filled.Delete, "", tint = Color.Red)
+            if (toDo.isComplete) {
+                Canvas(modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center), onDraw = {
+                    drawLine(
+                        color = Color.Black,
+                        start = Offset(x = 0f, y = size.height / 2),
+                        end = Offset(x = size.width, y = size.height / 2),
+                        strokeWidth = 8f
+                    )
+                })
             }
         }
     }
