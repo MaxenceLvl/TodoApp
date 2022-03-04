@@ -8,6 +8,9 @@ interface TodoDAO {
     @Query("SELECT * FROM todo ORDER BY id DESC")
     fun getTodos(): LiveData<MutableList<ToDo>>
 
+    @Query("SELECT * FROM todo WHERE id = :id")
+    suspend fun getById(id: Long): ToDo
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(todo:ToDo)
 

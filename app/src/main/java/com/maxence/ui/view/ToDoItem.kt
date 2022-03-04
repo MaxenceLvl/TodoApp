@@ -3,6 +3,7 @@ package com.maxence.ui.view
 import android.widget.Toast
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,7 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel) {
+fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel, onClick: () -> Unit) {
     val ctx = LocalContext.current
     Card(
         modifier = Modifier
@@ -28,6 +29,7 @@ fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel) {
             .fillMaxWidth()
             .height(42.dp)
             .wrapContentHeight(Alignment.CenterVertically)
+            .clickable { onClick() }
     ) {
         Box(modifier = Modifier
             .fillMaxSize()

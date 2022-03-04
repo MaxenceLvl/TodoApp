@@ -19,6 +19,14 @@ class TodoViewModel(application:Application):ViewModel() {
         }
     }
 
+    fun getById(todoId: Long): ToDo? {
+        var todo: ToDo? = null
+        viewModelScope.launch(Dispatchers.IO) {
+            todo = db.todoDao().getById(todoId)
+        }
+        return todo
+    }
+
     fun update(todo: ToDo){
         viewModelScope.launch(Dispatchers.IO) {
             db.todoDao().update(todo.id, !todo.isComplete)

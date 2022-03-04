@@ -9,6 +9,4 @@ data class ToDo(
     val description: String?,
     var isComplete: Boolean = false,
     @PrimaryKey(autoGenerate = true)
-    var id: Long = 0) {
-
-}
+    var id: Long = 0)

@@ -1,12 +1,13 @@
-package com.maxence
+package com.maxence.ui.view
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.maxence.ui.view.MainContent
+import androidx.navigation.NavHostController
+import com.maxence.data.TodoViewModel
 
 @Composable
-fun GetScaffold(){
+fun GetScaffold(navController: NavHostController, model: TodoViewModel) {
     val scaffoldState: ScaffoldState = rememberScaffoldState(
         snackbarHostState = SnackbarHostState()
     )
@@ -20,7 +21,7 @@ fun GetScaffold(){
                 backgroundColor = Color(0xFFFDA433),
             )
         },
-        content = { MainContent(scaffoldState) },
+        content = { HomeView(scaffoldState, navController, model) },
         backgroundColor = Color(0xFFBEEFF5),
     )
 }
