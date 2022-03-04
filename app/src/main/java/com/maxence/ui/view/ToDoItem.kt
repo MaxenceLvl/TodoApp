@@ -2,6 +2,7 @@ package com.maxence.ui.view
 
 import android.widget.Toast
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,7 +29,10 @@ fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel) {
             .height(42.dp)
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.CenterStart) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(color = if (toDo.isComplete) Color.LightGray else Color.Transparent),
+            contentAlignment = Alignment.CenterStart) {
             Row(
                 modifier = Modifier.padding(4.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -65,18 +69,18 @@ fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel) {
                     Icon(Icons.Filled.Delete, "", tint = Color.Red)
                 }
             }
-            if (toDo.isComplete) {
-                Canvas(modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center), onDraw = {
-                    drawLine(
-                        color = Color.Black,
-                        start = Offset(x = 0f, y = size.height / 2),
-                        end = Offset(x = size.width, y = size.height / 2),
-                        strokeWidth = 8f
-                    )
-                })
-            }
+//            if (toDo.isComplete) {
+//                Canvas(modifier = Modifier
+//                    .fillMaxSize()
+//                    .align(Alignment.Center), onDraw = {
+//                    drawLine(
+//                        color = Color.Black,
+//                        start = Offset(x = 0f, y = size.height / 2),
+//                        end = Offset(x = size.width, y = size.height / 2),
+//                        strokeWidth = 8f
+//                    )
+//                })
+//            }
         }
     }
 }
