@@ -16,7 +16,7 @@ import com.maxence.data.TodoViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeView(scaffoldState: ScaffoldState, navController: NavHostController, model: TodoViewModel) {
+fun HomeView(navController: NavHostController, model: TodoViewModel) {
     val scope = rememberCoroutineScope()
     val list: List<ToDo> = model.todoList.observeAsState(listOf()).value
     var textState by remember { mutableStateOf("") }
@@ -28,52 +28,52 @@ fun HomeView(scaffoldState: ScaffoldState, navController: NavHostController, mod
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-                shape = RoundedCornerShape(8.dp,),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xFFFFFFFF),
-                    focusedIndicatorColor = Color.Transparent, //hide the indicator
-                ),
-                value = textState,
-                onValueChange = { textState = it },
-                placeholder = {
-                    Text(text = "Enter Your Notes")
-                },
-            )
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Button(
-                    onClick = {
-                        model.insert(
-                            ToDo(
-                                title = textState,
-                                description = null,
-                            )
-                        )
-                        scope.launch {
-                            textState = ""
-                            scaffoldState.snackbarHostState.showSnackbar(
-                                message = "Notes added",
-                            )
-                        }
-                    }) {
-                    Text(text = "Add Notes")
-                }
-                Button(onClick = {
-                    model.clear()
-                    scope.launch {
-                        scaffoldState.snackbarHostState.showSnackbar(
-                            message = "All Notes deleted",
-                        )
-                    }
-                }) {
-                    Text(text = "Clear")
-                }
-            }
+//            TextField(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(vertical = 4.dp),
+//                shape = RoundedCornerShape(8.dp,),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = Color(0xFFFFFFFF),
+//                    focusedIndicatorColor = Color.Transparent, //hide the indicator
+//                ),
+//                value = textState,
+//                onValueChange = { textState = it },
+//                placeholder = {
+//                    Text(text = "Enter Your Notes")
+//                },
+//            )
+//            Row(
+//                horizontalArrangement = Arrangement.spacedBy(12.dp)
+//            ) {
+//                Button(
+//                    onClick = {
+//                        model.insert(
+//                            ToDo(
+//                                title = textState,
+//                                description = null,
+//                            )
+//                        )
+//                        scope.launch {
+//                            textState = ""
+//                            scaffoldState.snackbarHostState.showSnackbar(
+//                                message = "Notes added",
+//                            )
+//                        }
+//                    }) {
+//                    Text(text = "Add Notes")
+//                }
+//                Button(onClick = {
+//                    model.clear()
+//                    scope.launch {
+//                        scaffoldState.snackbarHostState.showSnackbar(
+//                            message = "All Notes deleted",
+//                        )
+//                    }
+//                }) {
+//                    Text(text = "Clear")
+//                }
+//            }
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(2.dp)
