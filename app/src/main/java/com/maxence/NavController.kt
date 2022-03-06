@@ -25,6 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.maxence.data.ToDoViewModelFactory
 import com.maxence.data.TodoViewModel
+import com.maxence.ui.view.AddToDoView
 import com.maxence.ui.view.DetailView
 import com.maxence.ui.view.HomeView
 
@@ -61,8 +62,11 @@ fun NavigationComponent() {
             val currentDestination = getNavDestination(navController = navController)
             if (currentDestination?.hierarchy?.any { it.route == "home" } == true) {
                 IconButton(
-                    modifier = Modifier.size(32.dp).clip(CircleShape).background(Color(0xFFFDA433)),
-                    onClick = { navController.popBackStack() }) {
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFFFDA433)),
+                    onClick = { navController.navigate("addTodo") }) {
                     Icon(Icons.Filled.Add, "", tint = Color.White)
                 }
             }
@@ -75,7 +79,7 @@ fun NavigationComponent() {
                     requireNotNull(todoId) { "todoId parameter wasn't found. Please make sure it's set!" }
                     DetailView(todoId, model)
                 }
-//            composable(Destinations.AddTodo) { AddTodoView(navController) }
+                composable("addTodo") { AddToDoView(navController, model) }
             }
         },
         backgroundColor = Color(0xFFBEEFF5),
