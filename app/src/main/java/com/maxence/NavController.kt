@@ -55,7 +55,7 @@ fun NavigationComponent() {
                     }
                     Text(text = "ToDo Application", color = Color.White)
                 },
-                backgroundColor = Color(0xFFFDA433),
+                backgroundColor = Color(0xFF164255),
             )
         },
         floatingActionButton = {
@@ -65,7 +65,7 @@ fun NavigationComponent() {
                     modifier = Modifier
                         .size(32.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFFFDA433)),
+                        .background(Color(0xFFe05657)),
                     onClick = { navController.navigate("addTodo") }) {
                     Icon(Icons.Filled.Add, "", tint = Color.White)
                 }
@@ -82,7 +82,7 @@ fun NavigationComponent() {
                 composable("addTodo") { AddToDoView(navController, model) }
             }
         },
-        backgroundColor = Color(0xFFBEEFF5),
+        backgroundColor = Color(0xFFE1E2E1),
     )
 }
 

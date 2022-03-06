@@ -19,13 +19,12 @@ fun DetailView(todoId: String, viewModel: TodoViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFBEEFF5))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp)
-                .background(Color.White.copy(alpha = 0.5f)),
+                .background(Color(0xFF456d82).copy(alpha = 0.3f)),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -45,7 +44,7 @@ fun DetailView(todoId: String, viewModel: TodoViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp)
-                .background(Color.White.copy(alpha = 0.5f)),
+                .background(Color(0xFF456d82).copy(alpha = 0.3f)),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

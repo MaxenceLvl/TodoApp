@@ -33,7 +33,7 @@ fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel, onClick: (
     ) {
         Box(modifier = Modifier
             .fillMaxSize()
-            .background(color = if (toDo.isComplete) Color.LightGray else Color.Transparent),
+            .background(color = if (toDo.isComplete) Color(0xFF456D82).copy(alpha = 0.4f) else Color.Transparent),
             contentAlignment = Alignment.CenterStart) {
             Row(
                 modifier = Modifier.padding(4.dp),
@@ -71,18 +71,6 @@ fun TodoItem(toDo: ToDo, scope: CoroutineScope, model: TodoViewModel, onClick: (
                     Icon(Icons.Filled.Delete, "", tint = Color.Red)
                 }
             }
-//            if (toDo.isComplete) {
-//                Canvas(modifier = Modifier
-//                    .fillMaxSize()
-//                    .align(Alignment.Center), onDraw = {
-//                    drawLine(
-//                        color = Color.Black,
-//                        start = Offset(x = 0f, y = size.height / 2),
-//                        end = Offset(x = size.width, y = size.height / 2),
-//                        strokeWidth = 8f
-//                    )
-//                })
-//            }
         }
     }
 }
